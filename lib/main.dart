@@ -1,4 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'view_model/ram_provider.dart';
+
+import 'view/gpu_list_page.dart';
+import 'view/home_page.dart';
+import 'view_model/gpu_provider.dart';
+import 'view_model/storage_provider.dart';
+import 'view_model/cpu_provider.dart';
+import 'view_model/cpu_cooler_provider.dart';
+import 'view_model/psu_provider.dart';
+import 'view_model/motherboard_provider.dart';
+import 'view_model/case_provider.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +21,15 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_) => GpuProvider()),
+      ChangeNotifierProvider(create: (_) => StorageProvider()),
+      ChangeNotifierProvider(create: (_) => CpuProvider()),
+      ChangeNotifierProvider(create: (_) => CpuCoolerProvider()),
+      ChangeNotifierProvider(create: (_) => RamProvider()),
+      ChangeNotifierProvider(create: (_) => PsuProvider()),
+      ChangeNotifierProvider(create: (_) => MoboProvider()),
+      ChangeNotifierProvider(create: (_) => CaseProvider())
+    ], child: const MaterialApp(home: Home()));
   }
 }

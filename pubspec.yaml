@@ -1,14 +1,17 @@
 name: mini_project_mandor_pc
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: ">=2.19.6 <3.0.0"
 
 dependencies:
+  dio: ^5.1.1
   flutter:
     sdk: flutter
+  http: ^0.13.5
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
