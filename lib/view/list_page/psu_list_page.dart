@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/view_model/storage_provider.dart';
+import '/view_model/psu_provider.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+typedef DataCallback = void Function(int id);
+
+class PsuListPage extends StatefulWidget {
+  final DataCallback callback;
+  const PsuListPage({super.key, required this.callback});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<PsuListPage> createState() => _PsuListPageState();
 }
 
-class _HomeState extends State<Home> {
+class _PsuListPageState extends State<PsuListPage> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.microtask(() =>
-        Provider.of<StorageProvider>(context, listen: false).fetchStorage());
+    Future.microtask(
+        () => Provider.of<PsuProvider>(context, listen: false).fetchPsu());
   }
 
   @override
@@ -24,14 +27,14 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: const Text('MandorPC'),
       ),
-      body: Consumer<StorageProvider>(builder: (context, storage, child) {
-        if (storage.state == RequestState.loading) {
+      body: Consumer<PsuProvider>(builder: (context, psu, child) {
+        if (psu.state == RequestState.loading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (storage.state == RequestState.loaded) {
+        } else if (psu.state == RequestState.loaded) {
           return ListView.builder(
-              itemCount: storage.storage.length,
+              itemCount: psu.psu.length,
               itemBuilder: (context, index) {
                 return Card(
                     shape: const RoundedRectangleBorder(
@@ -47,29 +50,31 @@ class _HomeState extends State<Home> {
                             child: Column(
                               children: [
                                 Text(
-                                  storage.storage[index].title,
+                                  psu.psu[index].title,
                                   textAlign: TextAlign.justify,
                                 ),
-                                Image.network(storage.storage[index].image),
+                                Image.network(psu.psu[index].image),
                                 Text(
-                                    'Rating : ${storage.storage[index].rating ?? 'No rating yet'}'),
+                                    'Rating : ${psu.psu[index].rating ?? 'No rating yet'}'),
                                 Text(
-                                    'Total Rating : ${storage.storage[index].ratingsTotal ?? 'No rating yet'}'),
-                                Text(
-                                    'USD ${storage.storage[index].price?.value}'),
+                                    'Total Rating : ${psu.psu[index].ratingsTotal ?? 'No rating yet'}'),
+                                Text('USD ${psu.psu[index].price.value}'),
                               ],
                             ),
                           ),
                           ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                widget.callback(psu.psu[index].id);
+                                Navigator.pop(context);
+                              },
                               child: const Text('Add to Cart'))
                         ],
                       ),
                     ));
               });
-        } else if (storage.state == RequestState.error) {
+        } else if (psu.state == RequestState.error) {
           return Center(
-            child: Text(storage.message),
+            child: Text(psu.message),
           );
         } else {
           return const Center(

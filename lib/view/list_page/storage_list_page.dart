@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/view_model/cpu_provider.dart';
+import '/view_model/storage_provider.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class StorageListPage extends StatefulWidget {
+  const StorageListPage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<StorageListPage> createState() => _StorageListPageState();
 }
 
-class _HomeState extends State<Home> {
+class _StorageListPageState extends State<StorageListPage> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.microtask(
-        () => Provider.of<CpuProvider>(context, listen: false).fetchCpu());
+    Future.microtask(() =>
+        Provider.of<StorageProvider>(context, listen: false).fetchStorage());
   }
 
   @override
@@ -24,14 +24,14 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: const Text('MandorPC'),
       ),
-      body: Consumer<CpuProvider>(builder: (context, cpu, child) {
-        if (cpu.state == RequestState.loading) {
+      body: Consumer<StorageProvider>(builder: (context, storage, child) {
+        if (storage.state == RequestState.loading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (cpu.state == RequestState.loaded) {
+        } else if (storage.state == RequestState.loaded) {
           return ListView.builder(
-              itemCount: cpu.cpu.length,
+              itemCount: storage.storage.length,
               itemBuilder: (context, index) {
                 return Card(
                     shape: const RoundedRectangleBorder(
@@ -47,15 +47,16 @@ class _HomeState extends State<Home> {
                             child: Column(
                               children: [
                                 Text(
-                                  cpu.cpu[index].title,
+                                  storage.storage[index].title,
                                   textAlign: TextAlign.justify,
                                 ),
-                                Image.network(cpu.cpu[index].image),
+                                Image.network(storage.storage[index].image),
                                 Text(
-                                    'Rating : ${cpu.cpu[index].rating ?? 'No rating yet'}'),
+                                    'Rating : ${storage.storage[index].rating ?? 'No rating yet'}'),
                                 Text(
-                                    'Total Rating : ${cpu.cpu[index].ratingsTotal ?? 'No rating yet'}'),
-                                Text('USD ${cpu.cpu[index].price?.value}'),
+                                    'Total Rating : ${storage.storage[index].ratingsTotal ?? 'No rating yet'}'),
+                                Text(
+                                    'USD ${storage.storage[index].price.value}'),
                               ],
                             ),
                           ),
@@ -66,9 +67,9 @@ class _HomeState extends State<Home> {
                       ),
                     ));
               });
-        } else if (cpu.state == RequestState.error) {
+        } else if (storage.state == RequestState.error) {
           return Center(
-            child: Text(cpu.message),
+            child: Text(storage.message),
           );
         } else {
           return const Center(

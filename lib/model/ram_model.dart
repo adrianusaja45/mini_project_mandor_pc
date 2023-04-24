@@ -34,12 +34,12 @@ class RamModel {
   bool? isPrime;
   double? rating;
   int? ratingsTotal;
-  Price? price;
+  Price price;
   Availability? availability;
 
   factory RamModel.fromJson(Map<String, dynamic> json) => RamModel(
         id: json["id"],
-        title: json["title"]!,
+        title: json["title"],
         asin: json["asin"],
         link: json["link"],
         categories: List<Category>.from(
@@ -64,7 +64,7 @@ class RamModel {
         "is_prime": isPrime,
         "rating": rating,
         "ratings_total": ratingsTotal,
-        "price": price!.toJson(),
+        "price": price.toJson(),
         "availability": availability?.toJson(),
       };
 }
@@ -95,7 +95,7 @@ class Category {
   String id;
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-        name: nameValues.map[json["name"]]!,
+        name: nameValues.map[json["name"]] as Name,
         id: json["id"],
       );
 
@@ -131,9 +131,9 @@ class Price {
   String? link;
 
   factory Price.fromJson(Map<String, dynamic> json) => Price(
-        symbol: symbolValues.map[json["symbol"]]!,
+        symbol: symbolValues.map[json["symbol"]] as Symbol,
         value: json["value"]?.toDouble(),
-        currency: currencyValues.map[json["currency"]]!,
+        currency: currencyValues.map[json["currency"]] as Currency,
         raw: json["raw"],
         name: json["name"],
         isPrimary: json["is_primary"],

@@ -45,7 +45,7 @@ class MotherboardModel {
   factory MotherboardModel.fromJson(Map<String, dynamic> json) =>
       MotherboardModel(
         id: json["id"],
-        title: json["title"]!,
+        title: json["title"],
         asin: json["asin"],
         link: json["link"],
         categories: List<CategoryElement>.from(
@@ -76,7 +76,7 @@ class MotherboardModel {
         "is_prime": isPrime,
         "rating": rating,
         "ratings_total": ratingsTotal,
-        "price": price!.toJson(),
+        "price": price?.toJson(),
         "amazons_choice": amazonsChoice?.toJson(),
         "bestseller": bestseller?.toJson(),
         "availability": availability?.toJson(),
@@ -130,7 +130,8 @@ class Bestseller {
 
   factory Bestseller.fromJson(Map<String, dynamic> json) => Bestseller(
         link: json["link"],
-        category: categoryEnumValues.map[json["category"]]!,
+        category: categoryEnumValues.map[json["category"]] ??
+            CategoryEnum.COMPUTER_MOTHERBOARDS,
       );
 
   Map<String, dynamic> toJson() => {
@@ -155,7 +156,8 @@ class CategoryElement {
 
   factory CategoryElement.fromJson(Map<String, dynamic> json) =>
       CategoryElement(
-        name: categoryEnumValues.map[json["name"]]!,
+        name: categoryEnumValues.map[json["name"]] ??
+            CategoryEnum.COMPUTER_MOTHERBOARDS,
         id: json["id"],
       );
 
@@ -187,11 +189,11 @@ class Price {
   String? link;
 
   factory Price.fromJson(Map<String, dynamic> json) => Price(
-        symbol: symbolValues.map[json["symbol"]]!,
+        symbol: symbolValues.map[json["symbol"]] ?? Symbol.EMPTY,
         value: json["value"]?.toDouble(),
-        currency: currencyValues.map[json["currency"]]!,
+        currency: currencyValues.map[json["currency"]] ?? Currency.USD,
         raw: json["raw"],
-        name: nameValues.map[json["name"]]!,
+        name: nameValues.map[json["name"]],
         isPrimary: json["is_primary"],
         asin: json["asin"],
         link: json["link"],

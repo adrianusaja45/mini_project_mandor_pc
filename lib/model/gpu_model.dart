@@ -22,8 +22,6 @@ class GpuModel {
     this.rating,
     this.ratingsTotal,
     this.price,
-    required this.page,
-    required this.idOverall,
     this.amazonsChoice,
     this.availability,
     this.coupon,
@@ -41,8 +39,6 @@ class GpuModel {
   double? rating;
   int? ratingsTotal;
   Price? price;
-  int page;
-  int idOverall;
   AmazonsChoice? amazonsChoice;
   Availability? availability;
   Coupon? coupon;
@@ -51,7 +47,7 @@ class GpuModel {
 
   factory GpuModel.fromJson(Map<String, dynamic> json) => GpuModel(
         id: json["id"],
-        title: json["title"]!,
+        title: json["title"],
         asin: json["asin"],
         link: json["link"],
         categories: List<Category>.from(
@@ -61,8 +57,6 @@ class GpuModel {
         rating: json["rating"]?.toDouble(),
         ratingsTotal: json["ratings_total"],
         price: json["price"] == null ? null : Price.fromJson(json["price"]),
-        page: json["page"],
-        idOverall: json["id_overall"],
         amazonsChoice: json["amazons_choice"] == null
             ? null
             : AmazonsChoice.fromJson(json["amazons_choice"]),
@@ -87,8 +81,6 @@ class GpuModel {
         "rating": rating,
         "ratings_total": ratingsTotal,
         "price": price?.toJson(),
-        "page": page,
-        "id_overall": idOverall,
         "amazons_choice": amazonsChoice?.toJson(),
         "availability": availability?.toJson(),
         "coupon": coupon?.toJson(),

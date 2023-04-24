@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'view_model/ram_provider.dart';
 
-import 'view/gpu_list_page.dart';
 import 'view/home_page.dart';
 import 'view_model/gpu_provider.dart';
 import 'view_model/storage_provider.dart';
@@ -21,15 +20,18 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: [
-      ChangeNotifierProvider(create: (_) => GpuProvider()),
-      ChangeNotifierProvider(create: (_) => StorageProvider()),
-      ChangeNotifierProvider(create: (_) => CpuProvider()),
-      ChangeNotifierProvider(create: (_) => CpuCoolerProvider()),
-      ChangeNotifierProvider(create: (_) => RamProvider()),
-      ChangeNotifierProvider(create: (_) => PsuProvider()),
-      ChangeNotifierProvider(create: (_) => MoboProvider()),
-      ChangeNotifierProvider(create: (_) => CaseProvider())
-    ], child: const MaterialApp(home: Home()));
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => GpuProvider()),
+          ChangeNotifierProvider(create: (_) => StorageProvider()),
+          ChangeNotifierProvider(create: (_) => CpuProvider()),
+          ChangeNotifierProvider(create: (_) => CpuCoolerProvider()),
+          ChangeNotifierProvider(create: (_) => RamProvider()),
+          ChangeNotifierProvider(create: (_) => PsuProvider()),
+          ChangeNotifierProvider(create: (_) => MoboProvider()),
+          ChangeNotifierProvider(create: (_) => CaseProvider())
+        ],
+        child:
+            const MaterialApp(debugShowCheckedModeBanner: false, home: Home()));
   }
 }

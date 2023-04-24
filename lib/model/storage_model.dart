@@ -36,14 +36,14 @@ class StorageModel {
   bool? isPrime;
   double? rating;
   int? ratingsTotal;
-  Price? price;
+  Price price;
   AmazonsChoice? amazonsChoice;
   Availability? availability;
   Bestseller? bestseller;
 
   factory StorageModel.fromJson(Map<String, dynamic> json) => StorageModel(
         id: json["id"],
-        title: json["title"]!,
+        title: json["title"],
         asin: json["asin"],
         link: json["link"],
         categories: List<Category>.from(
@@ -74,7 +74,7 @@ class StorageModel {
         "is_prime": isPrime,
         "rating": rating,
         "ratings_total": ratingsTotal,
-        "price": price!.toJson(),
+        "price": price.toJson(),
         "amazons_choice": amazonsChoice?.toJson(),
         "availability": availability?.toJson(),
         "bestseller": bestseller?.toJson(),
@@ -147,7 +147,7 @@ class Category {
   String id;
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-        name: nameValues.map[json["name"]]!,
+        name: nameValues.map[json["name"]] ?? Name.DATA_STORAGE,
         id: json["id"],
       );
 
@@ -183,9 +183,9 @@ class Price {
   String? link;
 
   factory Price.fromJson(Map<String, dynamic> json) => Price(
-        symbol: symbolValues.map[json["symbol"]]!,
+        symbol: symbolValues.map[json["symbol"]],
         value: json["value"]?.toDouble(),
-        currency: currencyValues.map[json["currency"]]!,
+        currency: currencyValues.map[json["currency"]],
         raw: json["raw"],
         name: json["name"],
         isPrimary: json["is_primary"],

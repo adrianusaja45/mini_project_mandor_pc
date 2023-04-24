@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/view_model/gpu_provider.dart';
+import '/view_model/ram_provider.dart';
 
-class GpuListPage extends StatefulWidget {
-  const GpuListPage({super.key});
+class RamListPage extends StatefulWidget {
+  const RamListPage({super.key});
 
   @override
-  State<GpuListPage> createState() => _GpuListPageState();
+  State<RamListPage> createState() => _RamListPageState();
 }
 
-class _GpuListPageState extends State<GpuListPage> {
+class _RamListPageState extends State<RamListPage> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Future.microtask(
-        () => Provider.of<GpuProvider>(context, listen: false).fetchGpu());
+        () => Provider.of<RamProvider>(context, listen: false).fetchRam());
   }
 
   @override
@@ -24,18 +24,14 @@ class _GpuListPageState extends State<GpuListPage> {
       appBar: AppBar(
         title: const Text('MandorPC'),
       ),
-      // body: const Center(
-      //   child: Text('Silakan klik tombol add untuk memulai'),
-      // ),
-
-      body: Consumer<GpuProvider>(builder: (context, gpu, child) {
-        if (gpu.state == RequestState.loading) {
+      body: Consumer<RamProvider>(builder: (context, ram, child) {
+        if (ram.state == RequestState.loading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (gpu.state == RequestState.loaded) {
+        } else if (ram.state == RequestState.loaded) {
           return ListView.builder(
-              itemCount: gpu.gpu.length,
+              itemCount: ram.ram.length,
               itemBuilder: (context, index) {
                 return Card(
                     shape: const RoundedRectangleBorder(
@@ -51,15 +47,15 @@ class _GpuListPageState extends State<GpuListPage> {
                             child: Column(
                               children: [
                                 Text(
-                                  gpu.gpu[index].title,
+                                  ram.ram[index].title,
                                   textAlign: TextAlign.justify,
                                 ),
-                                Image.network(gpu.gpu[index].image),
+                                Image.network(ram.ram[index].image),
                                 Text(
-                                    'Rating : ${gpu.gpu[index].rating ?? 'No rating yet'}'),
+                                    'Rating : ${ram.ram[index].rating ?? 'No rating yet'}'),
                                 Text(
-                                    'Total Rating : ${gpu.gpu[index].ratingsTotal ?? 'No rating yet'}'),
-                                Text('USD ${gpu.gpu[index].price?.value}'),
+                                    'Total Rating : ${ram.ram[index].ratingsTotal ?? 'No rating yet'}'),
+                                Text('USD ${ram.ram[index].price.value}'),
                               ],
                             ),
                           ),
@@ -70,9 +66,9 @@ class _GpuListPageState extends State<GpuListPage> {
                       ),
                     ));
               });
-        } else if (gpu.state == RequestState.error) {
+        } else if (ram.state == RequestState.error) {
           return Center(
-            child: Text(gpu.message),
+            child: Text(ram.message),
           );
         } else {
           return const Center(

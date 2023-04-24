@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/view_model/motherboard_provider.dart';
+import '/view_model/gpu_provider.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class GpuListPage extends StatefulWidget {
+  const GpuListPage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<GpuListPage> createState() => _GpuListPageState();
 }
 
-class _HomeState extends State<Home> {
+class _GpuListPageState extends State<GpuListPage> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Future.microtask(
-        () => Provider.of<MoboProvider>(context, listen: false).fetchMobo());
+        () => Provider.of<GpuProvider>(context, listen: false).fetchGpu());
   }
 
   @override
@@ -24,14 +24,18 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: const Text('MandorPC'),
       ),
-      body: Consumer<MoboProvider>(builder: (context, mobo, child) {
-        if (mobo.state == RequestState.loading) {
+      // body: const Center(
+      //   child: Text('Silakan klik tombol add untuk memulai'),
+      // ),
+
+      body: Consumer<GpuProvider>(builder: (context, gpu, child) {
+        if (gpu.state == RequestState.loading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (mobo.state == RequestState.loaded) {
+        } else if (gpu.state == RequestState.loaded) {
           return ListView.builder(
-              itemCount: mobo.mobo.length,
+              itemCount: gpu.gpu.length,
               itemBuilder: (context, index) {
                 return Card(
                     shape: const RoundedRectangleBorder(
@@ -47,28 +51,28 @@ class _HomeState extends State<Home> {
                             child: Column(
                               children: [
                                 Text(
-                                  mobo.mobo[index].title,
+                                  gpu.gpu[index].title,
                                   textAlign: TextAlign.justify,
                                 ),
-                                Image.network(mobo.mobo[index].image),
+                                Image.network(gpu.gpu[index].image),
                                 Text(
-                                    'Rating : ${mobo.mobo[index].rating ?? 'No rating yet'}'),
+                                    'Rating : ${gpu.gpu[index].rating ?? 'No rating yet'}'),
                                 Text(
-                                    'Total Rating : ${mobo.mobo[index].ratingsTotal ?? 'No rating yet'}'),
-                                Text('USD ${mobo.mobo[index].price?.value}'),
+                                    'Total Rating : ${gpu.gpu[index].ratingsTotal ?? 'No rating yet'}'),
+                                Text('USD ${gpu.gpu[index].price?.value}'),
                               ],
                             ),
                           ),
                           ElevatedButton(
                               onPressed: () {},
-                              child: const Text('Add to Cart'))
+                              child: const Text('Add to Build'))
                         ],
                       ),
                     ));
               });
-        } else if (mobo.state == RequestState.error) {
+        } else if (gpu.state == RequestState.error) {
           return Center(
-            child: Text(mobo.message),
+            child: Text(gpu.message),
           );
         } else {
           return const Center(

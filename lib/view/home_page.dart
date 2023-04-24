@@ -17,7 +17,9 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           title: const Text('MandorPC'),
         ),
-        body: const Placeholder(fallbackHeight: 100, fallbackWidth: 100),
+        body: const Center(
+          child: Text('Klik tombol + untuk pindah ke halaman wishlist'),
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(context,

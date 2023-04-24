@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/view_model/case_provider.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class CaseListPage extends StatefulWidget {
+  const CaseListPage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<CaseListPage> createState() => _CaseListPageState();
 }
 
-class _HomeState extends State<Home> {
+class _CaseListPageState extends State<CaseListPage> {
   @override
   void initState() {
     // TODO: implement initState

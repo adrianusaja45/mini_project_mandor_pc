@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/view_model/cpu_cooler_provider.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class CpuCoolerListPage extends StatefulWidget {
+  const CpuCoolerListPage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<CpuCoolerListPage> createState() => _CpuCoolerListPageState();
 }
 
-class _HomeState extends State<Home> {
+class _CpuCoolerListPageState extends State<CpuCoolerListPage> {
   @override
   void initState() {
     // TODO: implement initState

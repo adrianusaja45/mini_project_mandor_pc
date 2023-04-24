@@ -34,14 +34,14 @@ class CpuModel {
   String image;
   AmazonsChoice? amazonsChoice;
   bool? isPrime;
-  double? rating;
-  int? ratingsTotal;
-  Price? price;
+  double rating;
+  int ratingsTotal;
+  Price price;
   Availability? availability;
 
   factory CpuModel.fromJson(Map<String, dynamic> json) => CpuModel(
         id: json["id"],
-        title: json["title"]!,
+        title: json["title"],
         asin: json["asin"],
         link: json["link"],
         categories: List<Category>.from(
@@ -70,7 +70,7 @@ class CpuModel {
         "is_prime": isPrime,
         "rating": rating,
         "ratings_total": ratingsTotal,
-        "price": price!.toJson(),
+        "price": price.toJson(),
         "availability": availability?.toJson(),
       };
 }
@@ -121,7 +121,8 @@ class Category {
   String id;
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-        name: categoryNameValues.map[json["name"]]!,
+        name: categoryNameValues.map[json["name"]] ??
+            CategoryName.COMPUTER_CPU_PROCESSORS,
         id: json["id"],
       );
 
@@ -158,11 +159,11 @@ class Price {
   String? link;
 
   factory Price.fromJson(Map<String, dynamic> json) => Price(
-        symbol: symbolValues.map[json["symbol"]]!,
+        symbol: symbolValues.map[json["symbol"]] ?? Symbol.EMPTY,
         value: json["value"]?.toDouble(),
-        currency: currencyValues.map[json["currency"]]!,
+        currency: currencyValues.map[json["currency"]] ?? Currency.USD,
         raw: json["raw"],
-        name: priceNameValues.map[json["name"]]!,
+        name: priceNameValues.map[json["name"]],
         isPrimary: json["is_primary"],
         asin: json["asin"],
         link: json["link"],

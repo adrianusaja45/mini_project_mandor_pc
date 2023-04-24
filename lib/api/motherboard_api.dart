@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import '/model/motherboard_model.dart';
 
 class ApiMotherboard {
-  static const String url = 'http://192.168.241.166:3000/psu';
+  static const String url = 'http://192.168.251.119:3000/mobo';
 
   static Future<List<MotherboardModel>> getMobo() async {
     final response = await Dio().get(url);

@@ -14,26 +14,21 @@ class PsuModel {
   PsuModel({
     required this.id,
     required this.title,
-    required this.asin,
     required this.link,
     required this.categories,
     required this.image,
-    this.amazonsChoice,
-    this.isPrime,
     required this.rating,
     required this.ratingsTotal,
     required this.price,
     this.bestseller,
-    this.isSmallBusiness,
     this.isCarousel,
     this.carousel,
     this.availability,
-    this.coupon,
   });
 
   int id;
   String title;
-  String asin;
+
   String link;
   List<Category> categories;
   String image;
@@ -41,7 +36,7 @@ class PsuModel {
   bool? isPrime;
   double? rating;
   int? ratingsTotal;
-  Price? price;
+  Price price;
   Bestseller? bestseller;
   bool? isSmallBusiness;
   bool? isCarousel;
@@ -51,23 +46,17 @@ class PsuModel {
 
   factory PsuModel.fromJson(Map<String, dynamic> json) => PsuModel(
         id: json["id"],
-        title: json["title"]!,
-        asin: json["asin"],
+        title: json["title"],
         link: json["link"],
         categories: List<Category>.from(
             json["categories"].map((x) => Category.fromJson(x))),
         image: json["image"],
-        amazonsChoice: json["amazons_choice"] == null
-            ? null
-            : AmazonsChoice.fromJson(json["amazons_choice"]),
-        isPrime: json["is_prime"],
         rating: json["rating"]?.toDouble(),
         ratingsTotal: json["ratings_total"],
         price: Price.fromJson(json["price"]),
         bestseller: json["bestseller"] == null
             ? null
             : Bestseller.fromJson(json["bestseller"]),
-        isSmallBusiness: json["is_small_business"],
         isCarousel: json["is_carousel"],
         carousel: json["carousel"] == null
             ? null
@@ -75,13 +64,11 @@ class PsuModel {
         availability: json["availability"] == null
             ? null
             : Availability.fromJson(json["availability"]),
-        coupon: json["coupon"] == null ? null : Coupon.fromJson(json["coupon"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
-        "asin": asin,
         "link": link,
         "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
         "image": image,
@@ -89,7 +76,7 @@ class PsuModel {
         "is_prime": isPrime,
         "rating": rating,
         "ratings_total": ratingsTotal,
-        "price": price!.toJson(),
+        "price": price.toJson(),
         "bestseller": bestseller?.toJson(),
         "is_small_business": isSmallBusiness,
         "is_carousel": isCarousel,
@@ -189,8 +176,8 @@ class Category {
   Id id;
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-        name: nameValues.map[json["name"]]!,
-        id: idValues.map[json["id"]]!,
+        name: nameValues.map[json["name"]] ?? Name.ALL_DEPARTMENTS,
+        id: idValues.map[json["id"]] ?? Id.APS,
       );
 
   Map<String, dynamic> toJson() => {
@@ -249,9 +236,9 @@ class Price {
   String? link;
 
   factory Price.fromJson(Map<String, dynamic> json) => Price(
-        symbol: symbolValues.map[json["symbol"]]!,
+        symbol: symbolValues.map[json["symbol"]] ?? Symbol.EMPTY,
         value: json["value"]?.toDouble(),
-        currency: currencyValues.map[json["currency"]]!,
+        currency: currencyValues.map[json["currency"]] ?? Currency.USD,
         raw: json["raw"],
         name: json["name"],
         isPrimary: json["is_primary"],

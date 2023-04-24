@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/view_model/ram_provider.dart';
+import '/view_model/motherboard_provider.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class MoboListPage extends StatefulWidget {
+  const MoboListPage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<MoboListPage> createState() => _MoboListPageState();
 }
 
-class _HomeState extends State<Home> {
+class _MoboListPageState extends State<MoboListPage> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Future.microtask(
-        () => Provider.of<RamProvider>(context, listen: false).fetchRam());
+        () => Provider.of<MoboProvider>(context, listen: false).fetchMobo());
   }
 
   @override
@@ -24,14 +24,14 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: const Text('MandorPC'),
       ),
-      body: Consumer<RamProvider>(builder: (context, ram, child) {
-        if (ram.state == RequestState.loading) {
+      body: Consumer<MoboProvider>(builder: (context, mobo, child) {
+        if (mobo.state == RequestState.loading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (ram.state == RequestState.loaded) {
+        } else if (mobo.state == RequestState.loaded) {
           return ListView.builder(
-              itemCount: ram.ram.length,
+              itemCount: mobo.mobo.length,
               itemBuilder: (context, index) {
                 return Card(
                     shape: const RoundedRectangleBorder(
@@ -47,15 +47,15 @@ class _HomeState extends State<Home> {
                             child: Column(
                               children: [
                                 Text(
-                                  ram.ram[index].title,
+                                  mobo.mobo[index].title,
                                   textAlign: TextAlign.justify,
                                 ),
-                                Image.network(ram.ram[index].image),
+                                Image.network(mobo.mobo[index].image),
                                 Text(
-                                    'Rating : ${ram.ram[index].rating ?? 'No rating yet'}'),
+                                    'Rating : ${mobo.mobo[index].rating ?? 'No rating yet'}'),
                                 Text(
-                                    'Total Rating : ${ram.ram[index].ratingsTotal ?? 'No rating yet'}'),
-                                Text('USD ${ram.ram[index].price?.value}'),
+                                    'Total Rating : ${mobo.mobo[index].ratingsTotal ?? 'No rating yet'}'),
+                                Text('USD ${mobo.mobo[index].price?.value}'),
                               ],
                             ),
                           ),
@@ -66,9 +66,9 @@ class _HomeState extends State<Home> {
                       ),
                     ));
               });
-        } else if (ram.state == RequestState.error) {
+        } else if (mobo.state == RequestState.error) {
           return Center(
-            child: Text(ram.message),
+            child: Text(mobo.message),
           );
         } else {
           return const Center(
