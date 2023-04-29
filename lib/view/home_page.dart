@@ -1,6 +1,7 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
+import 'package:mini_project_mandor_pc/view/widget/custom_page_route.dart';
 import 'package:mini_project_mandor_pc/view/wishlists_page.dart';
 
 class Home extends StatefulWidget {
@@ -22,8 +23,7 @@ class _HomeState extends State<Home> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const WishListPage()));
+            Navigator.of(context).pushNamed('/wishlists');
           },
           child: const Icon(Icons.add),
         ));

@@ -1,12 +1,9 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 
 import '/model/case_model.dart';
 
 class ApiCase {
-  static const String url = 'http://192.168.251.119:3000/case';
+  static const String url = 'http://192.168.174.232:3000/case';
 
   static Future<List<CaseModel>> getCase() async {
     final response = await Dio().get(url);

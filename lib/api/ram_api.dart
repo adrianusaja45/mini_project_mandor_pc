@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import '/model/ram_model.dart';
 
 class ApiRam {
-  static const String url = 'http://192.168.251.119:3000/ram';
+  static const String url = 'http://192.168.174.232:3000/ram';
 
   static Future<List<RamModel>> getRam() async {
     final response = await Dio().get(url);

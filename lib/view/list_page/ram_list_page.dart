@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/view_model/ram_provider.dart';
 
+typedef DataCallback = void Function(int id);
+
 class RamListPage extends StatefulWidget {
-  const RamListPage({super.key});
+  final DataCallback callback;
+  const RamListPage({super.key, required this.callback});
 
   @override
   State<RamListPage> createState() => _RamListPageState();
@@ -38,7 +41,12 @@ class _RamListPageState extends State<RamListPage> {
                         side: BorderSide(color: Colors.blue),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        int id = ram.ram[index].id;
+
+                        Navigator.pushNamed(context, '/ramDetail',
+                            arguments: id);
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -60,7 +68,10 @@ class _RamListPageState extends State<RamListPage> {
                             ),
                           ),
                           ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                widget.callback(ram.ram[index].id);
+                                Navigator.pop(context);
+                              },
                               child: const Text('Add to Cart'))
                         ],
                       ),

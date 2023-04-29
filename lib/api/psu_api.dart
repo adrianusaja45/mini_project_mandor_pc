@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import '/model/psu_model.dart';
 
 class ApiPsu {
-  static const String url = 'http://192.168.251.119:3000/psu';
+  static const String url = 'http://192.168.174.232:3000/psu';
 
   static Future<List<PsuModel>> getPsu() async {
     final response = await Dio().get(url);
