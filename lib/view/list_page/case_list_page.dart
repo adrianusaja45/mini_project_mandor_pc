@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_mandor_pc/view/detail_page/case_detail_page.dart';
+import 'package:mini_project_mandor_pc/view/widget/animation_page_route.dart';
 import 'package:provider/provider.dart';
 import '/view_model/case_provider.dart';
 
+typedef DataCallback = void Function(int id);
+
 class CaseListPage extends StatefulWidget {
-  const CaseListPage({super.key});
+  final DataCallback callback;
+  const CaseListPage({super.key, required this.callback});
 
   @override
   State<CaseListPage> createState() => _CaseListPageState();
@@ -38,7 +43,12 @@ class _CaseListPageState extends State<CaseListPage> {
                           side: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          int id = casing.casing[index].id;
+
+                          Navigator.pushNamed(context, '/casingDetail',
+                              arguments: id);
+                        },
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -61,7 +71,10 @@ class _CaseListPageState extends State<CaseListPage> {
                               ),
                             ),
                             ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  widget.callback(casing.casing[index].id);
+                                  Navigator.pop(context);
+                                },
                                 child: const Text('Add to Cart'))
                           ],
                         ),

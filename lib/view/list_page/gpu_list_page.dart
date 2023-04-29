@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_mandor_pc/view/widget/animation_page_route.dart';
 import 'package:provider/provider.dart';
 import '/view_model/gpu_provider.dart';
 
+typedef DataCallback = void Function(int id);
+
 class GpuListPage extends StatefulWidget {
-  const GpuListPage({super.key});
+  final DataCallback callback;
+  const GpuListPage({super.key, required this.callback});
 
   @override
   State<GpuListPage> createState() => _GpuListPageState();
@@ -42,7 +46,10 @@ class _GpuListPageState extends State<GpuListPage> {
                         side: BorderSide(color: Colors.blue),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, '/gpuDetail',
+                            arguments: gpu.gpu[index].id);
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -64,7 +71,10 @@ class _GpuListPageState extends State<GpuListPage> {
                             ),
                           ),
                           ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                widget.callback(gpu.gpu[index].id);
+                                Navigator.pop(context);
+                              },
                               child: const Text('Add to Build'))
                         ],
                       ),

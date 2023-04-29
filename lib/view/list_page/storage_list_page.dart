@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/view_model/storage_provider.dart';
 
+typedef DataCallback = void Function(int id);
+
 class StorageListPage extends StatefulWidget {
-  const StorageListPage({super.key});
+  final DataCallback callback;
+  const StorageListPage({super.key, required this.callback});
 
   @override
   State<StorageListPage> createState() => _StorageListPageState();
@@ -38,7 +41,12 @@ class _StorageListPageState extends State<StorageListPage> {
                         side: BorderSide(color: Colors.blue),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        int id = storage.storage[index].id;
+
+                        Navigator.pushNamed(context, '/storageDetail',
+                            arguments: id);
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -61,7 +69,10 @@ class _StorageListPageState extends State<StorageListPage> {
                             ),
                           ),
                           ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                widget.callback(storage.storage[index].id);
+                                Navigator.pop(context);
+                              },
                               child: const Text('Add to Cart'))
                         ],
                       ),

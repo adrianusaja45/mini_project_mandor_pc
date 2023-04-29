@@ -1,5 +1,16 @@
 import 'package:flutter/material.dart';
+
+import 'package:mini_project_mandor_pc/view/widget/custom_page_route.dart';
 import 'package:provider/provider.dart';
+import 'view/detail_page/case_detail_page.dart';
+import 'view/detail_page/cpu_cooler_detail_page.dart';
+import 'view/detail_page/cpu_detail_page.dart';
+import 'view/detail_page/gpu_detail_page.dart';
+import 'view/detail_page/motherboard_detail_page.dart';
+import 'view/detail_page/psu_detail_page.dart';
+
+import 'view/detail_page/ram_detail_page.dart';
+import 'view/wishlists_page.dart';
 import 'view_model/ram_provider.dart';
 
 import 'view/home_page.dart';
@@ -31,7 +42,31 @@ class MainApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => MoboProvider()),
           ChangeNotifierProvider(create: (_) => CaseProvider())
         ],
-        child:
-            const MaterialApp(debugShowCheckedModeBanner: false, home: Home()));
+        child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: const Home(),
+            onGenerateRoute: (route) => onGenerateRoute(route)));
+  }
+
+  static Route? onGenerateRoute(RouteSettings settings) {
+    if (settings.name == '/wishlists') {
+      return CustomPageRoute(child: const WishListPage(), settings: settings);
+    } else if (settings.name == '/psuDetail') {
+      return CustomPageRoute(child: const PsuDetailPage(), settings: settings);
+    } else if (settings.name == '/cpuDetail') {
+      return CustomPageRoute(child: const CpuDetailPage(), settings: settings);
+    } else if (settings.name == '/casingDetail') {
+      return CustomPageRoute(child: const CaseDetailPage(), settings: settings);
+    } else if (settings.name == '/coolerDetail') {
+      return CustomPageRoute(
+          child: const CoolerDetailPage(), settings: settings);
+    } else if (settings.name == '/gpuDetail') {
+      return CustomPageRoute(child: const GpuDetailPage(), settings: settings);
+    } else if (settings.name == '/moboDetail') {
+      return CustomPageRoute(child: const MoboDetailPage(), settings: settings);
+    } else if (settings.name == '/ramDetail') {
+      return CustomPageRoute(child: const RamDetailPage(), settings: settings);
+    }
+    return null;
   }
 }

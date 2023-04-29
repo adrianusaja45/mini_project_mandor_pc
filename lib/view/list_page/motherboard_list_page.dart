@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_mandor_pc/view/detail_page/case_detail_page.dart';
 import 'package:provider/provider.dart';
 import '/view_model/motherboard_provider.dart';
 
+typedef DataCallback = void Function(int id);
+
 class MoboListPage extends StatefulWidget {
-  const MoboListPage({super.key});
+  final DataCallback callback;
+  const MoboListPage({super.key, required this.callback});
 
   @override
   State<MoboListPage> createState() => _MoboListPageState();
@@ -38,7 +42,12 @@ class _MoboListPageState extends State<MoboListPage> {
                         side: BorderSide(color: Colors.blue),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        int id = mobo.mobo[index].id;
+
+                        Navigator.pushNamed(context, '/moboDetail',
+                            arguments: id);
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -60,7 +69,10 @@ class _MoboListPageState extends State<MoboListPage> {
                             ),
                           ),
                           ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                widget.callback(mobo.mobo[index].id);
+                                Navigator.pop(context);
+                              },
                               child: const Text('Add to Cart'))
                         ],
                       ),

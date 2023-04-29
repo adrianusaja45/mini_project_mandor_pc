@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/view_model/cpu_cooler_provider.dart';
 
+typedef DataCallback = void Function(int id);
+
 class CpuCoolerListPage extends StatefulWidget {
-  const CpuCoolerListPage({super.key});
+  final DataCallback callback;
+  const CpuCoolerListPage({super.key, required this.callback});
 
   @override
   State<CpuCoolerListPage> createState() => _CpuCoolerListPageState();
@@ -38,7 +41,11 @@ class _CpuCoolerListPageState extends State<CpuCoolerListPage> {
                           side: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          int id = cooler.cooler[index].id;
+                          Navigator.pushNamed(context, '/coolerDetail',
+                              arguments: id);
+                        },
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -61,7 +68,10 @@ class _CpuCoolerListPageState extends State<CpuCoolerListPage> {
                               ),
                             ),
                             ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  widget.callback(cooler.cooler[index].id);
+                                  Navigator.pop(context);
+                                },
                                 child: const Text('Add to Cart'))
                           ],
                         ),

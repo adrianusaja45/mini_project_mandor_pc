@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_mandor_pc/view/detail_page/psu_detail_page.dart';
 import 'package:provider/provider.dart';
 import '/view_model/cpu_provider.dart';
 
+typedef DataCallback = void Function(int id);
+
 class CpuListPage extends StatefulWidget {
-  const CpuListPage({super.key});
+  final DataCallback callback;
+  const CpuListPage({super.key, required this.callback});
 
   @override
   State<CpuListPage> createState() => _CpuListPageState();
@@ -38,7 +42,12 @@ class _CpuListPageState extends State<CpuListPage> {
                         side: BorderSide(color: Colors.blue),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        int id = cpu.cpu[index].id;
+
+                        Navigator.of(context)
+                            .pushNamed('/cpuDetail', arguments: id);
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -59,7 +68,10 @@ class _CpuListPageState extends State<CpuListPage> {
                             ),
                           ),
                           ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                widget.callback(cpu.cpu[index].id);
+                                Navigator.pop(context);
+                              },
                               child: const Text('Add to Cart'))
                         ],
                       ),
