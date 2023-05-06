@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_mandor_pc/view/widget/animation_page_route.dart';
+
 import 'package:provider/provider.dart';
 import '/view_model/gpu_provider.dart';
 
@@ -16,7 +16,6 @@ class GpuListPage extends StatefulWidget {
 class _GpuListPageState extends State<GpuListPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.microtask(
         () => Provider.of<GpuProvider>(context, listen: false).fetchGpu());
@@ -66,7 +65,7 @@ class _GpuListPageState extends State<GpuListPage> {
                                     'Rating : ${gpu.gpu[index].rating ?? 'No rating yet'}'),
                                 Text(
                                     'Total Rating : ${gpu.gpu[index].ratingsTotal ?? 'No rating yet'}'),
-                                Text('USD ${gpu.gpu[index].price?.value}'),
+                                Text('USD ${gpu.gpu[index].price.value}'),
                               ],
                             ),
                           ),

@@ -15,6 +15,7 @@ class BuildProvider extends ChangeNotifier {
   String _message = '';
   String get message => _message;
 
+  bool isSuccess = false;
   Future<void> fetchBuild() async {
     _state = RequestState.loading;
     notifyListeners();
@@ -50,14 +51,12 @@ class BuildProvider extends ChangeNotifier {
   }
 
 //delete
-  Future<void> deleteBuild(int id) async {
-    _state = RequestState.loading;
+  Future<void> deleteBuild(int id, int index) async {
     notifyListeners();
     try {
       final result = await ApiBuild.deleteBuild(id);
       _builds.remove(result);
-      _state = RequestState.loaded;
-
+      _builds.removeAt(index);
       notifyListeners();
     } catch (e) {
       _state = RequestState.error;
@@ -69,13 +68,13 @@ class BuildProvider extends ChangeNotifier {
   //post
 
   Future<void> postBuild(SavedBuild savedBuild) async {
-    _state = RequestState.loading;
     notifyListeners();
     try {
       final result = await ApiBuild.postBuild(savedBuild);
       _builds.add(result);
-      _state = RequestState.loaded;
 
+      isSuccess = true;
+      debugPrint("HASIL : $result");
       notifyListeners();
     } catch (e) {
       _state = RequestState.error;
@@ -87,12 +86,13 @@ class BuildProvider extends ChangeNotifier {
   //update
 
   Future<void> updateBuild(SavedBuild savedBuild) async {
-    _state = RequestState.loading;
     notifyListeners();
     try {
       final result = await ApiBuild.updateBuild(savedBuild);
       _builds.add(result);
-      _state = RequestState.loaded;
+
+      isSuccess = true;
+      debugPrint("HASIL UPDATE : $result");
 
       notifyListeners();
     } catch (e) {

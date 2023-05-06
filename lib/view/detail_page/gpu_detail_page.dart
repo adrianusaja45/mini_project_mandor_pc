@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:url_launcher/url_launcher_string.dart';
+
 import '../../view_model/gpu_provider.dart';
 
 class GpuDetailPage extends StatefulWidget {
@@ -13,10 +15,17 @@ class GpuDetailPage extends StatefulWidget {
 class _GpuDetailPageState extends State<GpuDetailPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.microtask(
         () => Provider.of<GpuProvider>(context, listen: false).fetchGpu());
+  }
+
+  void launchUrl(String url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -34,8 +43,7 @@ class _GpuDetailPageState extends State<GpuDetailPage> {
 
       // perform your action here
       if (currentIndex == 0) {
-        Navigator.pop(context);
-        Navigator.pop(context, gpu.id);
+        launchUrl(gpu.link);
       } else {
         Navigator.pop(context);
       }
@@ -77,7 +85,7 @@ class _GpuDetailPageState extends State<GpuDetailPage> {
           height: 10,
         ),
         Text(
-          'USD ${gpu.price?.value}',
+          'USD ${gpu.price.value}',
           textAlign: TextAlign.start,
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
@@ -88,7 +96,7 @@ class _GpuDetailPageState extends State<GpuDetailPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.add), label: 'Add to WishList'),
+              icon: Icon(Icons.add), label: 'Go to Amazon Page'),
           BottomNavigationBarItem(icon: Icon(Icons.arrow_back), label: 'Back'),
         ],
         currentIndex: currentIndex,

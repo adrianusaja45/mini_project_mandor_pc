@@ -1,12 +1,9 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 
 import '/model/psu_model.dart';
 
 class ApiPsu {
-  static const String url = 'http://192.168.174.232:3000/psu';
+  static const String url = 'http://192.168.174.109:3000/psu';
 
   static Future<List<PsuModel>> getPsu() async {
     final response = await Dio().get(url);

@@ -19,8 +19,9 @@ class CpuProvider extends ChangeNotifier {
     _state = RequestState.loading;
     notifyListeners();
     try {
-      final result = await ApiCpu.getCpu();
+      final result = await ApiCpu().getCpu();
       _cpu = result;
+
       _state = RequestState.loaded;
 
       notifyListeners();

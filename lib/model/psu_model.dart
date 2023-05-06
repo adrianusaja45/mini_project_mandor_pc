@@ -217,7 +217,7 @@ class Coupon {
 class Price {
   Price({
     this.symbol,
-    this.value,
+    required this.value,
     this.currency,
     required this.raw,
     this.name,
@@ -227,7 +227,7 @@ class Price {
   });
 
   Symbol? symbol;
-  double? value;
+  double value;
   Currency? currency;
   String raw;
   String? name;

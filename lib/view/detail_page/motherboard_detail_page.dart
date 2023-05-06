@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:url_launcher/url_launcher_string.dart';
+
 import '../../view_model/motherboard_provider.dart';
 
 typedef DataCallback = void Function(int id);
@@ -17,10 +19,17 @@ class MoboDetailPage extends StatefulWidget {
 class _MoboDetailPageState extends State<MoboDetailPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.microtask(
         () => Provider.of<MoboProvider>(context, listen: false).fetchMobo());
+  }
+
+  void launchUrl(String url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -38,6 +47,7 @@ class _MoboDetailPageState extends State<MoboDetailPage> {
 
       // perform your action here
       if (currentIndex == 0) {
+        launchUrl(mobo.link);
       } else {
         Navigator.pop(context);
       }
@@ -90,7 +100,7 @@ class _MoboDetailPageState extends State<MoboDetailPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.add), label: 'Add to WishList'),
+              icon: Icon(Icons.add), label: 'Go to Amazon Page'),
           BottomNavigationBarItem(icon: Icon(Icons.arrow_back), label: 'Back'),
         ],
         currentIndex: currentIndex,

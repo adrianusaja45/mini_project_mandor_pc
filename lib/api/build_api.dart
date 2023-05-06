@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:mini_project_mandor_pc/model/build_model.dart';
+
+import '../model/build_model.dart';
 
 class ApiBuild {
-  static const url = 'http://192.168.174.232:3000/builds';
+  static const url = 'http://192.168.174.109:3000/builds';
 
   static Future<List<SavedBuild>> getBuild() async {
     final response = await Dio().get(url);
@@ -37,6 +38,7 @@ class ApiBuild {
     final response = await Dio().post(url, data: savedBuild.toJson());
     print('response: $response');
     if (response.statusCode == 201) {
+      print('response: ${response.data}');
       return SavedBuild.fromJson(response.data);
     } else {
       throw Exception('Failed to post data');
@@ -57,8 +59,8 @@ class ApiBuild {
   //update
 
   static Future<SavedBuild> updateBuild(SavedBuild savedBuild) async {
-    final response = await Dio()
-        .put('$url/${savedBuild.idBuild}', data: savedBuild.toJson());
+    final response =
+        await Dio().put('$url/${savedBuild.id}', data: savedBuild.toJson());
     print('response: $response');
     if (response.statusCode == 200) {
       return SavedBuild.fromJson(response.data);

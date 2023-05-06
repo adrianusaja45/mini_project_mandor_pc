@@ -11,18 +11,18 @@ String savedBuildToJson(List<SavedBuild> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class SavedBuild {
-  int? idBuild;
+  int? id;
   String? titleBuild;
   List<BuildItem>? buildItems;
 
   SavedBuild({
-    this.idBuild,
+    this.id,
     this.titleBuild,
     this.buildItems,
   });
 
   factory SavedBuild.fromJson(Map<String, dynamic> json) => SavedBuild(
-        idBuild: json["id_build"],
+        id: json["id"],
         titleBuild: json["title_build"],
         buildItems: json["build_items"] == null
             ? []
@@ -31,7 +31,7 @@ class SavedBuild {
       );
 
   Map<String, dynamic> toJson() => {
-        "id_build": idBuild,
+        "id": id,
         "title_build": titleBuild,
         "build_items": buildItems == null
             ? []
@@ -93,4 +93,24 @@ class Price {
         "currency": currency,
         "raw": raw,
       };
+}
+
+enum Currency { USD }
+
+final currencyValues = EnumValues({"USD": Currency.USD});
+
+enum Symbol { EMPTY }
+
+final symbolValues = EnumValues({"\u0024": Symbol.EMPTY});
+
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }
