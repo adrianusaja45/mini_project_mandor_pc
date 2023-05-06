@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import '/model/cpu_cooler_model.dart';
 
 class ApiCooler {
-  static const String url = 'http://192.168.174.232:3000/cpuCooler';
+  static const String url = 'http://192.168.174.109:3000/cpuCooler';
 
   static Future<List<CpuCoolerModel>> getCpuCooler() async {
     final response = await Dio().get(url);

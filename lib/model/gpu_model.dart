@@ -21,7 +21,7 @@ class GpuModel {
     this.isPrime,
     this.rating,
     this.ratingsTotal,
-    this.price,
+    required this.price,
     this.amazonsChoice,
     this.availability,
     this.coupon,
@@ -38,7 +38,7 @@ class GpuModel {
   bool? isPrime;
   double? rating;
   int? ratingsTotal;
-  Price? price;
+  Price price;
   AmazonsChoice? amazonsChoice;
   Availability? availability;
   Coupon? coupon;
@@ -56,7 +56,7 @@ class GpuModel {
         isPrime: json["is_prime"],
         rating: json["rating"]?.toDouble(),
         ratingsTotal: json["ratings_total"],
-        price: json["price"] == null ? null : Price.fromJson(json["price"]),
+        price: Price?.fromJson(json["price"]),
         amazonsChoice: json["amazons_choice"] == null
             ? null
             : AmazonsChoice.fromJson(json["amazons_choice"]),
@@ -80,7 +80,7 @@ class GpuModel {
         "is_prime": isPrime,
         "rating": rating,
         "ratings_total": ratingsTotal,
-        "price": price?.toJson(),
+        "price": price.toJson(),
         "amazons_choice": amazonsChoice?.toJson(),
         "availability": availability?.toJson(),
         "coupon": coupon?.toJson(),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_mandor_pc/view/detail_page/case_detail_page.dart';
+
 import 'package:provider/provider.dart';
 import '/view_model/motherboard_provider.dart';
 
@@ -16,7 +16,6 @@ class MoboListPage extends StatefulWidget {
 class _MoboListPageState extends State<MoboListPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.microtask(
         () => Provider.of<MoboProvider>(context, listen: false).fetchMobo());

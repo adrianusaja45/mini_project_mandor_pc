@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:url_launcher/url_launcher_string.dart';
+
 import '../../view_model/cpu_provider.dart';
 
-typedef DataCallback = void Function(int id);
-
 class CpuDetailPage extends StatefulWidget {
-  final DataCallback? callback;
-
-  const CpuDetailPage({super.key, this.callback});
+  const CpuDetailPage({
+    super.key,
+  });
 
   @override
   State<CpuDetailPage> createState() => _CpuDetailPageState();
@@ -17,10 +17,17 @@ class CpuDetailPage extends StatefulWidget {
 class _CpuDetailPageState extends State<CpuDetailPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.microtask(
         () => Provider.of<CpuProvider>(context, listen: false).fetchCpu());
+  }
+
+  void launchUrl(String url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -38,6 +45,7 @@ class _CpuDetailPageState extends State<CpuDetailPage> {
 
       // perform your action here
       if (currentIndex == 0) {
+        launchUrl(cpu.link);
       } else {
         Navigator.pop(context);
       }
@@ -90,7 +98,7 @@ class _CpuDetailPageState extends State<CpuDetailPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.add), label: 'Add to WishList'),
+              icon: Icon(Icons.add), label: 'Go to Amazon Page'),
           BottomNavigationBarItem(icon: Icon(Icons.arrow_back), label: 'Back'),
         ],
         currentIndex: currentIndex,

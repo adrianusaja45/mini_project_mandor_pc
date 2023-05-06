@@ -15,7 +15,6 @@ class StorageListPage extends StatefulWidget {
 class _StorageListPageState extends State<StorageListPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.microtask(() =>
         Provider.of<StorageProvider>(context, listen: false).fetchStorage());

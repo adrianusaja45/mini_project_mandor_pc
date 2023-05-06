@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_mandor_pc/view/detail_page/psu_detail_page.dart';
-import 'package:mini_project_mandor_pc/view/widget/animation_page_route.dart';
-import 'package:mini_project_mandor_pc/view/wishlists_page.dart';
+
 import 'package:provider/provider.dart';
 import '/view_model/psu_provider.dart';
 
@@ -18,7 +16,6 @@ class PsuListPage extends StatefulWidget {
 class _PsuListPageState extends State<PsuListPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.microtask(
         () => Provider.of<PsuProvider>(context, listen: false).fetchPsu());

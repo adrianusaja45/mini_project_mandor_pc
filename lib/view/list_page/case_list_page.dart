@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_mandor_pc/view/detail_page/case_detail_page.dart';
-import 'package:mini_project_mandor_pc/view/widget/animation_page_route.dart';
+
 import 'package:provider/provider.dart';
 import '/view_model/case_provider.dart';
 
@@ -17,7 +16,7 @@ class CaseListPage extends StatefulWidget {
 class _CaseListPageState extends State<CaseListPage> {
   @override
   void initState() {
-    // TODO: implement initState
+    //
     super.initState();
     Future.microtask(
         () => Provider.of<CaseProvider>(context, listen: false).fetchCasing());

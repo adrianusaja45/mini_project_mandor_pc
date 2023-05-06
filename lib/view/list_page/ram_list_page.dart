@@ -15,7 +15,6 @@ class RamListPage extends StatefulWidget {
 class _RamListPageState extends State<RamListPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.microtask(
         () => Provider.of<RamProvider>(context, listen: false).fetchRam());

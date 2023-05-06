@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:url_launcher/url_launcher_string.dart';
+
 import '../../view_model/case_provider.dart';
 
 typedef DataCallback = void Function(int id);
@@ -17,10 +19,17 @@ class CaseDetailPage extends StatefulWidget {
 class _CaseDetailPageState extends State<CaseDetailPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.microtask(
         () => Provider.of<CaseProvider>(context, listen: false).fetchCasing());
+  }
+
+  void _launchUrl(String url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -38,6 +47,7 @@ class _CaseDetailPageState extends State<CaseDetailPage> {
 
       // perform your action here
       if (currentIndex == 0) {
+        _launchUrl(casing.link);
       } else {
         Navigator.pop(context);
       }
@@ -90,7 +100,7 @@ class _CaseDetailPageState extends State<CaseDetailPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.add), label: 'Add to WishList'),
+              icon: Icon(Icons.add), label: 'Go to Amazon Page'),
           BottomNavigationBarItem(icon: Icon(Icons.arrow_back), label: 'Back'),
         ],
         currentIndex: currentIndex,

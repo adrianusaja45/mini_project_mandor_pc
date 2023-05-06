@@ -19,7 +19,7 @@ class RamProvider extends ChangeNotifier {
     _state = RequestState.loading;
     notifyListeners();
     try {
-      final result = await ApiRam.getRam();
+      final result = await ApiRam().getRam();
       _ram = result;
       _state = RequestState.loaded;
 

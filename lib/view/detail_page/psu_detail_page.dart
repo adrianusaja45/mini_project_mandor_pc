@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:url_launcher/url_launcher_string.dart';
+
 import '../../view_model/psu_provider.dart';
 
 typedef DataCallback = void Function(int id);
@@ -17,10 +19,17 @@ class PsuDetailPage extends StatefulWidget {
 class _PsuDetailPageState extends State<PsuDetailPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.microtask(
         () => Provider.of<PsuProvider>(context, listen: false).fetchPsu());
+  }
+
+  void launchUrl(String url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -38,9 +47,7 @@ class _PsuDetailPageState extends State<PsuDetailPage> {
 
       // perform your action here
       if (currentIndex == 0) {
-        widget.callback?.call(psu.id);
-        Navigator.pop(context);
-        Navigator.pop(context);
+        launchUrl(psu.link);
       } else {
         Navigator.pop(context);
       }
@@ -93,7 +100,7 @@ class _PsuDetailPageState extends State<PsuDetailPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.add), label: 'Add to WishList'),
+              icon: Icon(Icons.add), label: 'Go to Amazon Page'),
           BottomNavigationBarItem(icon: Icon(Icons.arrow_back), label: 'Back'),
         ],
         currentIndex: currentIndex,

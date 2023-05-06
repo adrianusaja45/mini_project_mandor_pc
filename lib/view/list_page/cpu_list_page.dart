@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_mandor_pc/view/detail_page/psu_detail_page.dart';
+
 import 'package:provider/provider.dart';
 import '/view_model/cpu_provider.dart';
 
@@ -16,7 +16,6 @@ class CpuListPage extends StatefulWidget {
 class _CpuListPageState extends State<CpuListPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.microtask(
         () => Provider.of<CpuProvider>(context, listen: false).fetchCpu());

@@ -5,9 +5,9 @@ import 'package:http/http.dart' as http;
 import '/model/cpu_model.dart';
 
 class ApiCpu {
-  static const String url = 'http://192.168.174.232:3000/cpu';
+  static const String url = 'http://192.168.174.109:3000/cpu';
 
-  static Future<List<CpuModel>> getCpu() async {
+  Future<List<CpuModel>> getCpu() async {
     final response = await Dio().get(url);
     print('response: $response');
     if (response.statusCode == 200) {

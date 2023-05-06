@@ -15,7 +15,7 @@ class CpuCoolerListPage extends StatefulWidget {
 class _CpuCoolerListPageState extends State<CpuCoolerListPage> {
   @override
   void initState() {
-    // TODO: implement initState
+    //
     super.initState();
     Future.microtask(() =>
         Provider.of<CpuCoolerProvider>(context, listen: false).fetchCooler());

@@ -19,7 +19,7 @@ class GpuProvider extends ChangeNotifier {
     _state = RequestState.loading;
     notifyListeners();
     try {
-      final result = await ApiGpu.getGpu();
+      final result = await ApiGpu().getGpu();
       _gpu = result;
       _state = RequestState.loaded;
 
