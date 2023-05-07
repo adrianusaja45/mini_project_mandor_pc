@@ -19,7 +19,7 @@ class CaseProvider extends ChangeNotifier {
     _state = RequestState.loading;
     notifyListeners();
     try {
-      final result = await ApiCase.getCase();
+      final result = await ApiCase().getCase();
       _casing = result;
       _state = RequestState.loaded;
 

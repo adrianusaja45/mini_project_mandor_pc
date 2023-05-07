@@ -16,136 +16,200 @@ class _SelectorPageState extends State<SelectorPage> {
   final titleController = TextEditingController();
 
   Future<void> submit() async {
-    var vm = Provider.of<SelectorVM>(context, listen: false);
+    var provider = Provider.of<SelectorProvider>(context, listen: false);
 
     var title = titleController.text.trim();
     SavedBuild savedBuild = SavedBuild(titleBuild: title, buildItems: [
       BuildItem(
-        idPart: vm.getSortedProducts(vm.currentBudget)[0].id,
-        title: vm.getSortedProducts(vm.currentBudget)[0].title,
-        image: vm.getSortedProducts(vm.currentBudget)[0].image,
+        idPart: provider.getSortedProducts(provider.currentBudget)[0].id,
+        title: provider.getSortedProducts(provider.currentBudget)[0].title,
+        image: provider.getSortedProducts(provider.currentBudget)[0].image,
         price: Price(
-          symbol:
-              vm.getSortedProducts(vm.currentBudget)[0].price.symbol.toString(),
-          value: vm.getSortedProducts(vm.currentBudget)[0].price.value,
-          currency: vm
-              .getSortedProducts(vm.currentBudget)[0]
+          symbol: provider
+              .getSortedProducts(provider.currentBudget)[0]
+              .price
+              .symbol
+              .toString(),
+          value:
+              provider.getSortedProducts(provider.currentBudget)[0].price.value,
+          currency: provider
+              .getSortedProducts(provider.currentBudget)[0]
               .price
               .currency
               .toString(),
-          raw: vm.getSortedProducts(vm.currentBudget)[0].price.raw.toString(),
+          raw: provider
+              .getSortedProducts(provider.currentBudget)[0]
+              .price
+              .raw
+              .toString(),
         ),
       ),
       BuildItem(
-        idPart: vm.getSortedProducts(vm.currentBudget)[1].id,
-        title: vm.getSortedProducts(vm.currentBudget)[1].title,
-        image: vm.getSortedProducts(vm.currentBudget)[1].image,
+        idPart: provider.getSortedProducts(provider.currentBudget)[1].id,
+        title: provider.getSortedProducts(provider.currentBudget)[1].title,
+        image: provider.getSortedProducts(provider.currentBudget)[1].image,
         price: Price(
-          symbol:
-              vm.getSortedProducts(vm.currentBudget)[1].price.symbol.toString(),
-          value: vm.getSortedProducts(vm.currentBudget)[1].price.value,
-          currency: vm
-              .getSortedProducts(vm.currentBudget)[1]
+          symbol: provider
+              .getSortedProducts(provider.currentBudget)[1]
+              .price
+              .symbol
+              .toString(),
+          value:
+              provider.getSortedProducts(provider.currentBudget)[1].price.value,
+          currency: provider
+              .getSortedProducts(provider.currentBudget)[1]
               .price
               .currency
               .toString(),
-          raw: vm.getSortedProducts(vm.currentBudget)[1].price.raw.toString(),
+          raw: provider
+              .getSortedProducts(provider.currentBudget)[1]
+              .price
+              .raw
+              .toString(),
         ),
       ),
       BuildItem(
-        idPart: vm.getSortedProducts(vm.currentBudget)[2].id,
-        title: vm.getSortedProducts(vm.currentBudget)[2].title,
-        image: vm.getSortedProducts(vm.currentBudget)[2].image,
+        idPart: provider.getSortedProducts(provider.currentBudget)[2].id,
+        title: provider.getSortedProducts(provider.currentBudget)[2].title,
+        image: provider.getSortedProducts(provider.currentBudget)[2].image,
         price: Price(
-          symbol:
-              vm.getSortedProducts(vm.currentBudget)[2].price.symbol.toString(),
-          value: vm.getSortedProducts(vm.currentBudget)[2].price.value,
-          currency: vm
-              .getSortedProducts(vm.currentBudget)[2]
+          symbol: provider
+              .getSortedProducts(provider.currentBudget)[2]
+              .price
+              .symbol
+              .toString(),
+          value:
+              provider.getSortedProducts(provider.currentBudget)[2].price.value,
+          currency: provider
+              .getSortedProducts(provider.currentBudget)[2]
               .price
               .currency
               .toString(),
-          raw: vm.getSortedProducts(vm.currentBudget)[2].price.raw.toString(),
+          raw: provider
+              .getSortedProducts(provider.currentBudget)[2]
+              .price
+              .raw
+              .toString(),
         ),
       ),
       BuildItem(
-        idPart: vm.getSortedProducts(vm.currentBudget)[3].id,
-        title: vm.getSortedProducts(vm.currentBudget)[3].title,
-        image: vm.getSortedProducts(vm.currentBudget)[3].image,
+        idPart: provider.getSortedProducts(provider.currentBudget)[3].id,
+        title: provider.getSortedProducts(provider.currentBudget)[3].title,
+        image: provider.getSortedProducts(provider.currentBudget)[3].image,
         price: Price(
-          symbol:
-              vm.getSortedProducts(vm.currentBudget)[3].price.symbol.toString(),
-          value: vm.getSortedProducts(vm.currentBudget)[3].price.value,
-          currency: vm
-              .getSortedProducts(vm.currentBudget)[3]
+          symbol: provider
+              .getSortedProducts(provider.currentBudget)[3]
+              .price
+              .symbol
+              .toString(),
+          value:
+              provider.getSortedProducts(provider.currentBudget)[3].price.value,
+          currency: provider
+              .getSortedProducts(provider.currentBudget)[3]
               .price
               .currency
               .toString(),
-          raw: vm.getSortedProducts(vm.currentBudget)[3].price.raw.toString(),
+          raw: provider
+              .getSortedProducts(provider.currentBudget)[3]
+              .price
+              .raw
+              .toString(),
         ),
       ),
       BuildItem(
-        idPart: vm.getSortedProducts(vm.currentBudget)[4].id,
-        title: vm.getSortedProducts(vm.currentBudget)[4].title,
-        image: vm.getSortedProducts(vm.currentBudget)[4].image,
+        idPart: provider.getSortedProducts(provider.currentBudget)[4].id,
+        title: provider.getSortedProducts(provider.currentBudget)[4].title,
+        image: provider.getSortedProducts(provider.currentBudget)[4].image,
         price: Price(
-          symbol:
-              vm.getSortedProducts(vm.currentBudget)[4].price.symbol.toString(),
-          value: vm.getSortedProducts(vm.currentBudget)[4].price.value,
-          currency: vm
-              .getSortedProducts(vm.currentBudget)[4]
+          symbol: provider
+              .getSortedProducts(provider.currentBudget)[4]
+              .price
+              .symbol
+              .toString(),
+          value:
+              provider.getSortedProducts(provider.currentBudget)[4].price.value,
+          currency: provider
+              .getSortedProducts(provider.currentBudget)[4]
               .price
               .currency
               .toString(),
-          raw: vm.getSortedProducts(vm.currentBudget)[4].price.raw.toString(),
+          raw: provider
+              .getSortedProducts(provider.currentBudget)[4]
+              .price
+              .raw
+              .toString(),
         ),
       ),
       BuildItem(
-        idPart: vm.getSortedProducts(vm.currentBudget)[5].id,
-        title: vm.getSortedProducts(vm.currentBudget)[5].title,
-        image: vm.getSortedProducts(vm.currentBudget)[5].image,
+        idPart: provider.getSortedProducts(provider.currentBudget)[5].id,
+        title: provider.getSortedProducts(provider.currentBudget)[5].title,
+        image: provider.getSortedProducts(provider.currentBudget)[5].image,
         price: Price(
-          symbol:
-              vm.getSortedProducts(vm.currentBudget)[5].price.symbol.toString(),
-          value: vm.getSortedProducts(vm.currentBudget)[5].price.value,
-          currency: vm
-              .getSortedProducts(vm.currentBudget)[5]
+          symbol: provider
+              .getSortedProducts(provider.currentBudget)[5]
+              .price
+              .symbol
+              .toString(),
+          value:
+              provider.getSortedProducts(provider.currentBudget)[5].price.value,
+          currency: provider
+              .getSortedProducts(provider.currentBudget)[5]
               .price
               .currency
               .toString(),
-          raw: vm.getSortedProducts(vm.currentBudget)[5].price.raw.toString(),
+          raw: provider
+              .getSortedProducts(provider.currentBudget)[5]
+              .price
+              .raw
+              .toString(),
         ),
       ),
       BuildItem(
-        idPart: vm.getSortedProducts(vm.currentBudget)[6].id,
-        title: vm.getSortedProducts(vm.currentBudget)[6].title,
-        image: vm.getSortedProducts(vm.currentBudget)[6].image,
+        idPart: provider.getSortedProducts(provider.currentBudget)[6].id,
+        title: provider.getSortedProducts(provider.currentBudget)[6].title,
+        image: provider.getSortedProducts(provider.currentBudget)[6].image,
         price: Price(
-          symbol:
-              vm.getSortedProducts(vm.currentBudget)[6].price.symbol.toString(),
-          value: vm.getSortedProducts(vm.currentBudget)[6].price.value,
-          currency: vm
-              .getSortedProducts(vm.currentBudget)[6]
+          symbol: provider
+              .getSortedProducts(provider.currentBudget)[6]
+              .price
+              .symbol
+              .toString(),
+          value:
+              provider.getSortedProducts(provider.currentBudget)[6].price.value,
+          currency: provider
+              .getSortedProducts(provider.currentBudget)[6]
               .price
               .currency
               .toString(),
-          raw: vm.getSortedProducts(vm.currentBudget)[6].price.raw.toString(),
+          raw: provider
+              .getSortedProducts(provider.currentBudget)[6]
+              .price
+              .raw
+              .toString(),
         ),
       ),
       BuildItem(
-        idPart: vm.getSortedProducts(vm.currentBudget)[7].id,
-        title: vm.getSortedProducts(vm.currentBudget)[7].title,
-        image: vm.getSortedProducts(vm.currentBudget)[7].image,
+        idPart: provider.getSortedProducts(provider.currentBudget)[7].id,
+        title: provider.getSortedProducts(provider.currentBudget)[7].title,
+        image: provider.getSortedProducts(provider.currentBudget)[7].image,
         price: Price(
-          symbol:
-              vm.getSortedProducts(vm.currentBudget)[7].price.symbol.toString(),
-          value: vm.getSortedProducts(vm.currentBudget)[7].price.value,
-          currency: vm
-              .getSortedProducts(vm.currentBudget)[7]
+          symbol: provider
+              .getSortedProducts(provider.currentBudget)[7]
+              .price
+              .symbol
+              .toString(),
+          value:
+              provider.getSortedProducts(provider.currentBudget)[7].price.value,
+          currency: provider
+              .getSortedProducts(provider.currentBudget)[7]
               .price
               .currency
               .toString(),
-          raw: vm.getSortedProducts(vm.currentBudget)[7].price.raw.toString(),
+          raw: provider
+              .getSortedProducts(provider.currentBudget)[7]
+              .price
+              .raw
+              .toString(),
         ),
       ),
     ]);
@@ -171,26 +235,26 @@ class _SelectorPageState extends State<SelectorPage> {
   void initState() {
     super.initState();
     Future.microtask(
-        () => Provider.of<SelectorVM>(context, listen: false).fetchCpu());
+        () => Provider.of<SelectorProvider>(context, listen: false).fetchCpu());
     Future.microtask(
-        () => Provider.of<SelectorVM>(context, listen: false).fetchGpu());
+        () => Provider.of<SelectorProvider>(context, listen: false).fetchGpu());
     Future.microtask(
-        () => Provider.of<SelectorVM>(context, listen: false).fetchRam());
+        () => Provider.of<SelectorProvider>(context, listen: false).fetchRam());
+
+    Future.microtask(() =>
+        Provider.of<SelectorProvider>(context, listen: false).fetchMobo());
+
+    Future.microtask(() =>
+        Provider.of<SelectorProvider>(context, listen: false).fetchCase());
 
     Future.microtask(
-        () => Provider.of<SelectorVM>(context, listen: false).fetchMobo());
+        () => Provider.of<SelectorProvider>(context, listen: false).fetchPsu());
 
-    Future.microtask(
-        () => Provider.of<SelectorVM>(context, listen: false).fetchCase());
+    Future.microtask(() =>
+        Provider.of<SelectorProvider>(context, listen: false).fetchStorage());
 
-    Future.microtask(
-        () => Provider.of<SelectorVM>(context, listen: false).fetchPsu());
-
-    Future.microtask(
-        () => Provider.of<SelectorVM>(context, listen: false).fetchStorage());
-
-    Future.microtask(
-        () => Provider.of<SelectorVM>(context, listen: false).fetchCpuCooler());
+    Future.microtask(() =>
+        Provider.of<SelectorProvider>(context, listen: false).fetchCpuCooler());
   }
 
   @override
@@ -199,20 +263,22 @@ class _SelectorPageState extends State<SelectorPage> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(children: [
-          Consumer<SelectorVM>(
-            builder: (context, vm, child) {
+          Consumer<SelectorProvider>(
+            builder: (context, provider, child) {
               return Row(
                 children: [
-                  const Text('Budget: '),
-                  Text(vm.currentBudget.toStringAsFixed(2)),
+                  Text('Budget: ',
+                      style: Theme.of(context).textTheme.displayMedium),
+                  Text('\$ ${provider.currentBudget.toStringAsFixed(2)}',
+                      style: Theme.of(context).textTheme.displayMedium),
                   Slider(
-                    value: vm.currentBudget,
+                    value: provider.currentBudget,
                     min: 0,
                     max: 5000.0,
                     divisions: 100,
-                    label: vm.currentBudget.round().toStringAsFixed(2),
+                    label: provider.currentBudget.round().toStringAsFixed(2),
                     onChanged: (double value) {
-                      vm.onSliderBudgetValueChange(value);
+                      provider.onSliderBudgetValueChange(value);
                     },
                   ),
                 ],
@@ -220,8 +286,8 @@ class _SelectorPageState extends State<SelectorPage> {
             },
           ),
           Expanded(
-            child: Consumer<SelectorVM>(
-              builder: (context, vm, _) {
+            child: Consumer<SelectorProvider>(
+              builder: (context, provider, _) {
                 return Column(
                   children: [
                     Container(
@@ -241,35 +307,51 @@ class _SelectorPageState extends State<SelectorPage> {
                       ),
                       child: ListView.builder(
                         padding: const EdgeInsets.all(8),
-                        itemCount:
-                            vm.getSortedProducts(vm.currentBudget).length,
+                        itemCount: provider
+                            .getSortedProducts(provider.currentBudget)
+                            .length,
                         itemBuilder: (context, index) {
                           return Card(
-                            shape: Border.all(
-                                color: Colors.black,
-                                width: 2,
-                                style: BorderStyle.solid),
-                            child: ListTile(
-                              leading: Image.network(
-                                vm
-                                    .getSortedProducts(vm.currentBudget)[index]
-                                    .image,
-                                width: 50,
-                                height: 50,
+                            shape: BeveledRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  gradient: LinearGradient(
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                    colors: [
+                                      Theme.of(context).colorScheme.primary,
+                                      const Color(0xFF6887ea),
+                                    ],
+                                  )),
+                              child: ListTile(
+                                leading: Image.network(
+                                  provider
+                                      .getSortedProducts(
+                                          provider.currentBudget)[index]
+                                      .image,
+                                  width: 50,
+                                  height: 50,
+                                ),
+                                title: Text(
+                                  provider
+                                      .getSortedProducts(
+                                          provider.currentBudget)[index]
+                                      .title,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: false,
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall,
+                                ),
+                                subtitle: Text(
+                                  '\$ ${provider.getSortedProducts(provider.currentBudget)[index].price.value}',
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall,
+                                ),
                               ),
-                              title: Text(
-                                vm
-                                    .getSortedProducts(vm.currentBudget)[index]
-                                    .title,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: false,
-                              ),
-                              subtitle: Text(vm
-                                  .getSortedProducts(vm.currentBudget)[index]
-                                  .price
-                                  .value
-                                  .toString()),
                             ),
                           );
                         },
@@ -293,8 +375,7 @@ class _SelectorPageState extends State<SelectorPage> {
                                     topRight: Radius.circular(20),
                                   ),
                                 ),
-                                backgroundColor:
-                                    const Color.fromARGB(255, 8, 44, 73),
+                                backgroundColor: const Color(0xFFf5f8fa),
                                 isScrollControlled: true,
                                 context: context,
                                 builder: (context) => Container(
@@ -317,7 +398,9 @@ class _SelectorPageState extends State<SelectorPage> {
                                                   hintText: 'Title',
                                                   hintStyle: TextStyle(
                                                       color: Color.fromARGB(
-                                                          255, 88, 85, 85)),
+                                                          255, 88, 85, 85),
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                   border: OutlineInputBorder(
                                                     borderSide: BorderSide(
                                                         color: Colors.white),

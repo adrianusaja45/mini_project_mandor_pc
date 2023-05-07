@@ -19,7 +19,7 @@ class CpuCoolerProvider extends ChangeNotifier {
     _state = RequestState.loading;
     notifyListeners();
     try {
-      final result = await ApiCooler.getCpuCooler();
+      final result = await ApiCooler().getCpuCooler();
       _cooler = result;
       _state = RequestState.loaded;
 

@@ -3,9 +3,9 @@ import 'package:dio/dio.dart';
 import '/model/motherboard_model.dart';
 
 class ApiMotherboard {
-  static const String url = 'http://192.168.174.109:3000/mobo';
+  static const String url = 'http://192.168.52.245:3000/mobo';
 
-  static Future<List<MotherboardModel>> getMobo() async {
+  Future<List<MotherboardModel>> getMobo() async {
     final response = await Dio().get(url);
     print('response: $response');
     if (response.statusCode == 200) {

@@ -19,7 +19,7 @@ class MoboProvider extends ChangeNotifier {
     _state = RequestState.loading;
     notifyListeners();
     try {
-      final result = await ApiMotherboard.getMobo();
+      final result = await ApiMotherboard().getMobo();
       _mobo = result;
       _state = RequestState.loaded;
 

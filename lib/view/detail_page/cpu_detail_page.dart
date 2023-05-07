@@ -52,53 +52,78 @@ class _CpuDetailPageState extends State<CpuDetailPage> {
     }
 
     return Scaffold(
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        SizedBox(
-          height: 300,
-          width: double.infinity,
-          child: Image.network(
-            cpu.image,
-            fit: BoxFit.cover,
+      body: SafeArea(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            height: 300,
+            width: double.infinity,
+            child: Image.network(
+              cpu.image,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          cpu.title,
-          textAlign: TextAlign.justify,
-          style: const TextStyle(
-            fontSize: 20,
+          const SizedBox(
+            height: 10,
           ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Text('Rating : ${cpu.rating}',
-            textAlign: TextAlign.start,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        const SizedBox(
-          height: 10,
-        ),
-        Text('Total Ratings : ${cpu.ratingsTotal}',
-            textAlign: TextAlign.start,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          'USD ${cpu.price.value}',
-          textAlign: TextAlign.start,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-      ]),
+          Container(
+            height: 338,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                borderRadius:
+                    const BorderRadius.only(topLeft: Radius.circular(30)),
+                gradient: LinearGradient(
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                  colors: [
+                    Theme.of(context).colorScheme.primary,
+                    const Color(0xFF6887ea),
+                  ],
+                )),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  cpu.title,
+                  textAlign: TextAlign.justify,
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Rating : ${cpu.rating}',
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Total Ratings : ${cpu.ratingsTotal}',
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text('\$ ${cpu.price.value}',
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context).textTheme.displaySmall),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
+          )
+        ]),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.add), label: 'Go to Amazon Page'),
+            icon: Icon(Icons.add),
+            label: 'Go to Amazon Page',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.arrow_back), label: 'Back'),
         ],
         currentIndex: currentIndex,
