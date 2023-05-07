@@ -17,7 +17,7 @@ import '../model/psu_model.dart';
 import '../model/ram_model.dart';
 import '../model/storage_model.dart';
 
-class SelectorVM extends ChangeNotifier {
+class SelectorProvider extends ChangeNotifier {
   List<CpuModel> _cpuList = [];
   List<GpuModel> _gpuList = [];
   List<RamModel> _ramList = [];
@@ -47,27 +47,27 @@ class SelectorVM extends ChangeNotifier {
   }
 
   Future<void> fetchMobo() async {
-    _moboList = await ApiMotherboard.getMobo();
+    _moboList = await ApiMotherboard().getMobo();
     notifyListeners();
   }
 
   Future<void> fetchCase() async {
-    _caseList = await ApiCase.getCase();
+    _caseList = await ApiCase().getCase();
     notifyListeners();
   }
 
   Future<void> fetchPsu() async {
-    _psuList = await ApiPsu.getPsu();
+    _psuList = await ApiPsu().getPsu();
     notifyListeners();
   }
 
   Future<void> fetchStorage() async {
-    _storageList = await ApiStorage.getStorage();
+    _storageList = await ApiStorage().getStorage();
     notifyListeners();
   }
 
   Future<void> fetchCpuCooler() async {
-    _cpuCoolerList = await ApiCooler.getCpuCooler();
+    _cpuCoolerList = await ApiCooler().getCpuCooler();
     notifyListeners();
   }
 

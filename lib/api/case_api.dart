@@ -3,9 +3,9 @@ import 'package:dio/dio.dart';
 import '/model/case_model.dart';
 
 class ApiCase {
-  static const String url = 'http://192.168.174.109:3000/case';
+  static const String url = 'http://192.168.52.245:3000/case';
 
-  static Future<List<CaseModel>> getCase() async {
+  Future<List<CaseModel>> getCase() async {
     final response = await Dio().get(url);
     print('response: $response');
     if (response.statusCode == 200) {

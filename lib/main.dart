@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_mandor_pc/themes/app_theme.dart';
 
 import 'package:mini_project_mandor_pc/view/widget/custom_page_route.dart';
+import 'package:mini_project_mandor_pc/view_model/auth_provider.dart';
 import 'package:mini_project_mandor_pc/view_model/build_provider.dart';
 import 'package:mini_project_mandor_pc/view_model/selector_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'model/user_model.dart';
 import 'view/detail_page/case_detail_page.dart';
 import 'view/detail_page/cpu_cooler_detail_page.dart';
 import 'view/detail_page/cpu_detail_page.dart';
 import 'view/detail_page/gpu_detail_page.dart';
 import 'view/detail_page/motherboard_detail_page.dart';
 import 'view/detail_page/psu_detail_page.dart';
-
 import 'view/detail_page/ram_detail_page.dart';
+import 'view/detail_page/storage_detail_page.dart';
+import 'view/login_page.dart';
 import 'view/selector_page.dart';
 import 'view/wishlists_page.dart';
 import 'view_model/ram_provider.dart';
-
 import 'view/home_page.dart';
 import 'view_model/gpu_provider.dart';
 import 'view_model/storage_provider.dart';
@@ -25,12 +29,19 @@ import 'view_model/psu_provider.dart';
 import 'view_model/motherboard_provider.dart';
 import 'view_model/case_provider.dart';
 
-void main() {
-  runApp(const MainApp());
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String name = prefs.getString('name').toString();
+
+  runApp(MainApp(
+    name: name,
+  ));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final String? name;
+  const MainApp({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +56,13 @@ class MainApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => MoboProvider()),
           ChangeNotifierProvider(create: (_) => CaseProvider()),
           ChangeNotifierProvider(create: (_) => BuildProvider()),
-          ChangeNotifierProvider(create: (_) => SelectorVM())
+          ChangeNotifierProvider(create: (_) => SelectorProvider()),
+          ChangeNotifierProvider(create: (_) => AuthProvider())
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: const Home(),
+            theme: AppTheme.light,
+            initialRoute: name != null && name != 'null' ? '/home' : '/login',
             onGenerateRoute: (route) => onGenerateRoute(route)));
   }
 
@@ -75,7 +88,13 @@ class MainApp extends StatelessWidget {
       return CustomPageRoute(child: const Home(), settings: settings);
     } else if (settings.name == '/selectorPage') {
       return CustomPageRoute(child: const SelectorPage(), settings: settings);
+    } else if (settings.name == '/login') {
+      return CustomPageRoute(child: const LoginPage(), settings: settings);
+    } else if (settings.name == '/storageDetail') {
+      return CustomPageRoute(
+          child: const StorageDetailPage(), settings: settings);
     }
+
     return null;
   }
 }

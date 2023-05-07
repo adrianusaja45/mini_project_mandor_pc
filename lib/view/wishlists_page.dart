@@ -578,28 +578,11 @@ class _WishListPageState extends State<WishListPage> {
         coolerBuild!;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: buildId != null
           ? SafeArea(
               child: Column(
                 children: [
-                  if (_cpuId != null ||
-                      _gpuId != null ||
-                      _moboId != null ||
-                      _ramId != null ||
-                      _storageId != null ||
-                      _psuId != null ||
-                      _casingId != null ||
-                      _coolerId != null)
-                    Text('Total Price: $totalPrice'),
-                  if (_cpuId == null ||
-                      _gpuId == null ||
-                      _moboId == null ||
-                      _ramId == null ||
-                      _storageId == null ||
-                      _psuId == null ||
-                      _casingId == null ||
-                      _coolerId == null)
-                    Text('Total Price: $totalBuildPrice'),
                   Container(
                     height: 643,
                     decoration: BoxDecoration(
@@ -1314,8 +1297,7 @@ class _WishListPageState extends State<WishListPage> {
                                   topRight: Radius.circular(20),
                                 ),
                               ),
-                              backgroundColor:
-                                  const Color.fromARGB(255, 8, 44, 73),
+                              backgroundColor: const Color(0xFFf5f8fa),
                               isScrollControlled: true,
                               context: context,
                               builder: (context) => Container(
@@ -1362,9 +1344,31 @@ class _WishListPageState extends State<WishListPage> {
           : SafeArea(
               child: Column(
                 children: [
-                  Text('Total Price : $totalPrice'),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  if (_cpuId != null ||
+                      _gpuId != null ||
+                      _moboId != null ||
+                      _ramId != null ||
+                      _storageId != null ||
+                      _psuId != null ||
+                      _casingId != null ||
+                      _coolerId != null)
+                    Text(
+                      'Total Price: ${totalPrice.toStringAsFixed(2)}',
+                      style: Theme.of(context).textTheme.displayMedium,
+                    )
+                  else
+                    Text(
+                      'Total Price: 0',
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   Container(
-                    height: 600,
+                    height: 578,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
@@ -1852,8 +1856,7 @@ class _WishListPageState extends State<WishListPage> {
                                   topRight: Radius.circular(20),
                                 ),
                               ),
-                              backgroundColor:
-                                  const Color.fromARGB(255, 8, 44, 73),
+                              backgroundColor: const Color(0xFFf5f8fa),
                               isScrollControlled: true,
                               context: context,
                               builder: (context) => Container(

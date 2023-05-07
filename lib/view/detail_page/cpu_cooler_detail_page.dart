@@ -54,49 +54,73 @@ class _CoolerDetailPageState extends State<CoolerDetailPage> {
     }
 
     return Scaffold(
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        SizedBox(
-          height: 300,
-          width: double.infinity,
-          child: Image.network(
-            cooler.image,
-            fit: BoxFit.cover,
+      body: SafeArea(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            height: 300,
+            width: double.infinity,
+            child: Image.network(
+              cooler.image,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          cooler.title,
-          textAlign: TextAlign.justify,
-          style: const TextStyle(
-            fontSize: 20,
+          const SizedBox(
+            height: 10,
           ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Text('Rating : ${cooler.rating}',
-            textAlign: TextAlign.start,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        const SizedBox(
-          height: 10,
-        ),
-        Text('Total Ratings : ${cooler.ratingsTotal}',
-            textAlign: TextAlign.start,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          'USD ${cooler.price?.value}',
-          textAlign: TextAlign.start,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-      ]),
+          Container(
+            height: 338,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                borderRadius:
+                    const BorderRadius.only(topLeft: Radius.circular(30)),
+                gradient: LinearGradient(
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                  colors: [
+                    Theme.of(context).colorScheme.primary,
+                    const Color(0xFF6887ea),
+                  ],
+                )),
+            child: Column(
+              children: [
+                Text(
+                  cooler.title,
+                  textAlign: TextAlign.justify,
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Rating : ${cooler.rating}',
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Total Ratings : ${cooler.ratingsTotal}',
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'USD ${cooler.price?.value}',
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
+          )
+        ]),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(

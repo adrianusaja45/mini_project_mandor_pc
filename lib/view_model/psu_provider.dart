@@ -19,7 +19,7 @@ class PsuProvider extends ChangeNotifier {
     _state = RequestState.loading;
     notifyListeners();
     try {
-      final result = await ApiPsu.getPsu();
+      final result = await ApiPsu().getPsu();
       _psu = result;
       _state = RequestState.loaded;
 

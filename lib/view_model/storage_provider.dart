@@ -19,7 +19,7 @@ class StorageProvider extends ChangeNotifier {
     _state = RequestState.loading;
     notifyListeners();
     try {
-      final result = await ApiStorage.getStorage();
+      final result = await ApiStorage().getStorage();
       _storage = result;
       _state = RequestState.loaded;
 
