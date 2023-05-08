@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool obscure = true;
 
   @override
   void initState() {
@@ -63,6 +64,9 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       controller: _usernameController,
                       decoration: const InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.account_circle,
+                        ),
                         hintText: 'Name',
                         border: InputBorder.none,
                       ),
@@ -77,8 +81,19 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: TextFormField(
+                      obscureText: obscure,
+                      keyboardType: TextInputType.visiblePassword,
                       controller: _passwordController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          Icons.lock,
+                        ),
+                        suffixIcon: IconButton(
+                            onPressed: () => setState(() => obscure = !obscure),
+                            icon: Icon(
+                              obscure ? Icons.visibility : Icons.visibility_off,
+                              color: Theme.of(context).colorScheme.primary,
+                            )),
                         hintText: 'Password',
                         border: InputBorder.none,
                       ),
