@@ -7,7 +7,7 @@ import 'package:mini_project_mandor_pc/view_model/build_provider.dart';
 import 'package:mini_project_mandor_pc/view_model/selector_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'model/user_model.dart';
+
 import 'view/detail_page/case_detail_page.dart';
 import 'view/detail_page/cpu_cooler_detail_page.dart';
 import 'view/detail_page/cpu_detail_page.dart';

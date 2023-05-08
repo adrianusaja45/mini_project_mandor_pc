@@ -551,32 +551,6 @@ class _WishListPageState extends State<WishListPage> {
         casingPrice! +
         coolerPrice!;
 
-    var cpuBuild =
-        buildId != null ? build[indexBuild].buildItems![0].price?.value : 0;
-    var gpuBuild =
-        buildId != null ? build[indexBuild].buildItems![1].price?.value : 0;
-    var moboBuild =
-        buildId != null ? build[indexBuild].buildItems![2].price?.value : 0;
-    var ramBuild =
-        buildId != null ? build[indexBuild].buildItems![3].price?.value : 0;
-    var storageBuild =
-        buildId != null ? build[indexBuild].buildItems![4].price?.value : 0;
-    var psuBuild =
-        buildId != null ? build[indexBuild].buildItems![5].price?.value : 0;
-    var casingBuild =
-        buildId != null ? build[indexBuild].buildItems![6].price?.value : 0;
-    var coolerBuild =
-        buildId != null ? build[indexBuild].buildItems![7].price?.value : 0;
-
-    var totalBuildPrice = cpuBuild! +
-        gpuBuild! +
-        moboBuild! +
-        ramBuild! +
-        storageBuild! +
-        psuBuild! +
-        casingBuild! +
-        coolerBuild!;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: buildId != null

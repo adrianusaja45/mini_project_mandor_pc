@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:mini_project_mandor_pc/view/login_page.dart';
-import 'package:mini_project_mandor_pc/view_model/auth_provider.dart';
 
 import 'package:mini_project_mandor_pc/view_model/build_provider.dart';
 import 'package:provider/provider.dart';
@@ -90,7 +89,7 @@ class _HomeState extends State<Home> {
               return Stack(children: [
                 Container(
                   padding: const EdgeInsets.only(top: 45),
-                  height: 600,
+                  height: 800,
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     itemCount: value.builds.length,
